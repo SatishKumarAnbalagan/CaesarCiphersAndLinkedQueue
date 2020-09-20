@@ -8,6 +8,8 @@
 * Email ID - anbalagan.s@northeastern.edu
 */
 
+#include <stdio.h>
+
 int encode(const char *plaintext, int key);
 int decode(const char *plaintext, int key);
 
