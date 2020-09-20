@@ -25,24 +25,24 @@ void encode(const char *plaintext, int key) {
 
   printf("\nEncode input string : %s\n", pInput);
 
-  for (int i = 0; pInput[i] != '\0'; i++) {
-		temp = pInput[i];
-		if (temp >= 'a' && temp <= 'z') {
-			temp = temp + key;
-			if (temp > 'z') {
-				temp = temp - 'z' + 'a' - 1;
-			}
-			pInput[i] = temp - 32; // to upper case
-		} else if (temp >= 'A' && temp <= 'Z') {
-			temp = temp + key;
-			if (temp > 'Z') {
-				temp = temp - 'Z' + 'A' - 1;
-			}
-			pInput[i] = temp;
-		}
-	}
-	printf("\nEncrypted Message: %s\n", plaintext);
-
+  for(int i = 0; pInput[i] != '\0'; i++) {
+    temp = pInput[i];
+    if(temp >= 'a' && temp <= 'z') {
+      temp = temp + key;
+      if(temp > 'z') {
+        temp = temp - 'z' + 'a' - 1;
+      }
+      pInput[i] = temp - 32; // to upper case
+    }
+    else if(temp >= 'A' && temp <= 'Z') {
+      temp = temp + key;
+      if(temp > 'Z') {
+        temp = temp - 'Z' + 'A' - 1;
+      }
+      pInput[i] = temp;
+    }
+  }
+  printf("\nEncrypted Message: %s\n", plaintext);
 }
 
 void decode(const char *plaintext, int key) {
@@ -55,23 +55,24 @@ void decode(const char *plaintext, int key) {
   }
 
   printf("\nDecode input string : %s\n", pInput);
-	for (int i = 0; pInput[i] != '\0'; i++) {
-		temp = pInput[i];
-		if (temp >= 'a' && temp <= 'z') {
-			temp = temp - key;
-			if (temp < 'a') {
-				temp = temp + 'z' - 'a' + 1;
-			}
-			pInput[i] = temp - 32; // to upper case
-		} else if (temp >= 'A' && temp <= 'Z') {
-			temp = temp - key;
-			if (temp < 'A') {
-				temp = temp + 'Z' - 'A' + 1;
-			}
-			pInput[i] = temp;
-		}
-	}
-	printf("\nDecrypted Message: %s\n", plaintext);
+  for(int i = 0; pInput[i] != '\0'; i++) {
+    temp = pInput[i];
+    if(temp >= 'a' && temp <= 'z') {
+      temp = temp - key;
+      if(temp < 'a') {
+        temp = temp + 'z' - 'a' + 1;
+      }
+      pInput[i] = temp - 32; // to upper case
+    }
+    else if(temp >= 'A' && temp <= 'Z') {
+      temp = temp - key;
+      if(temp < 'A') {
+        temp = temp + 'Z' - 'A' + 1;
+      }
+      pInput[i] = temp;
+    }
+  }
+  printf("\nDecrypted Message: %s\n", plaintext);
 }
 
 void getKey(int *pKey) {
