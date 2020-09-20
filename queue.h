@@ -1,7 +1,7 @@
 /*
 * CS5600 - Computer Systems, Project 0
 *
-* queue.c
+* queue.h
 *
 * Author - Satish Kumar Anbalagan
 * NUID - 001351994
@@ -12,12 +12,12 @@
 
 //Type definitions
 
-typedef struct process {
+typedef struct _process {
   int identifier;
   char *name;
 } process_t;
 
-typedef struct queue {
+typedef struct _queue {
   void *data;
 } queue_t;
 
