@@ -11,29 +11,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int encode(const char *plaintext, int key);
-int decode(const char *plaintext, int key);
+void encode(const char *plaintext, int key);
+void decode(const char *plaintext, int key);
 
-int encode(const char *plaintext, int key) {
-  int ret = -1;
-  printf("\nEncode input string : %s\n", plaintext);
+void encode(const char *plaintext, int key) {
+  char temp;
+  char *pInput = (char*) plaintext;
 
-  return ret;    
+  if(pInput == NULL) {
+    perror("\nERROR : Encode input NULL\n");
+    exit(-1);
+  }
+
+  printf("\nEncode input string : %s\n", pInput);
+
+  for (int i = 0; pInput[i] != '\0'; i++) {
+		temp = pInput[i];
+		if (temp >= 'a' && temp <= 'z') {
+			temp = temp + key;
+			if (temp > 'z') {
+				temp = temp - 'z' + 'a' - 1;
+			}
+			pInput[i] = temp - 32; // to upper case
+		} else if (temp >= 'A' && temp <= 'Z') {
+			temp = temp + key;
+			if (temp > 'Z') {
+				temp = temp - 'Z' + 'A' - 1;
+			}
+			pInput[i] = temp;
+		}
+	}
+	printf("\nEncrypted Message: %s\n", plaintext);
+
 }
 
-int decode(const char *plaintext, int key) {
-  int ret = -1;
-  printf("\nDecode input string : %s\n", plaintext);
+void decode(const char *plaintext, int key) {
+  char temp;
+  char *pInput = (char*) plaintext;
 
-  return ret;    
+  if(pInput == NULL) {
+    perror("\nERROR : Decode input NULL\n");
+    exit(-1);
+  }
+
+  printf("\nDecode input string : %s\n", pInput);
+	for (int i = 0; pInput[i] != '\0'; i++) {
+		temp = pInput[i];
+		if (temp >= 'a' && temp <= 'z') {
+			temp = temp - key;
+			if (temp < 'a') {
+				temp = temp + 'z' - 'a' + 1;
+			}
+			pInput[i] = temp - 32; // to upper case
+		} else if (temp >= 'A' && temp <= 'Z') {
+			temp = temp - key;
+			if (temp < 'A') {
+				temp = temp + 'Z' - 'A' + 1;
+			}
+			pInput[i] = temp;
+		}
+	}
+	printf("\nDecrypted Message: %s\n", plaintext);
 }
 
 void getKey(int *pKey) {
   printf("\nEnter key: ");
   scanf("%d", pKey);
+  if(*pKey < 0 || *pKey > 25) {
+    perror("\nERROR : Key must be within 0-25.\n");
+    exit(-1);
+  }
 }
 
-void getMessage(char *pInput) {
+void getUserInput(char *pInput) {
   int c;
   int i = 0;
   printf("\nEnter the message: ");
@@ -49,38 +99,20 @@ void getMessage(char *pInput) {
 int main(void) {
   char *input = malloc(sizeof(*input));
   if(input == NULL) {
-    perror("\nMemory not initialized\n");
+    perror("\nERROR : Memory not initialized\n");
     exit(-1);
   }
   int key;
-  int choice;
-  getMessage(input);
-  getKey(&key);
-  printf("Entered string: %s\n", input);
-  printf("Entered key: %d\n", key);
 
-  while(1) {
-    printf("\n1. Encrytion\n2. Decryption\n3. Exit\n");
-    printf("\nEnter your choice: ");
-    scanf("%d", &choice);
-    switch(choice) {
-      case 1:
-        encode(input, key);
-        break;
-      case 2:
-        decode(input, key);
-        break;
-      case 3:
-        exit(0);
-        break;
-      default:
-        printf("\nPlease enter correct option.\n");
-        break;
-    }
-  }
-  free(input);
+  getUserInput(input);
+  getKey(&key);
+
+  encode(input, key);
+  decode(input, key);
+
   printf("\n");
 
+  free(input);
   return 0;
 
 }
