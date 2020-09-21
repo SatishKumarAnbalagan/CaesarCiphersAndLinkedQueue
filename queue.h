@@ -9,19 +9,32 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 //Type definitions
 
 typedef struct _process {
-  int identifier;
+  int PID;
   char *name;
 } process_t;
 
+typedef struct _node {
+  process_t* p;
+  struct _node *next;
+} node_t;
+
 typedef struct _queue {
   void *data;
+  node_t *front;
+  node_t *rear;
 } queue_t;
 
 //Function declarations
+int isempty(queue_t *queue);
+
+void initialize(queue_t *queue);
+
+void display(node_t *head);
 
 void enqueue(queue_t *queue, void *element);
 
