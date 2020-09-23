@@ -1,12 +1,14 @@
-/*
-* CS5600 - Computer Systems, Project 0
-*
-* caesar.c
-*
-* Author - Satish Kumar Anbalagan
-* NUID - 001351994
-* Email ID - anbalagan.s@northeastern.edu
-*/
+/**
+ * CS5600 - Computer Systems, Project 0
+ *
+ * caesar.c
+ * 
+ * Caesar cipher implementation with encryption and decryption of user input. 
+ *
+ * Author - Satish Kumar Anbalagan
+ * Date - Sept 17, 2020
+ * Email ID - anbalagan.s@northeastern.edu
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
