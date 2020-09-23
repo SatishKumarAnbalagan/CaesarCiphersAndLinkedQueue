@@ -27,7 +27,7 @@ int isempty(queue_t *queue)
 
 void display(node_t *head)
 {
-    if(head == NULL) {
+    if (head == NULL) {
         printf("NULL\n");
     }
     else {
@@ -42,7 +42,7 @@ void enqueue(queue_t *queue, void *element)
     tmp = (node_t *) malloc(sizeof(*tmp));
     tmp->p = element;
     tmp->next = NULL;
-    if(!isempty(queue)) {
+    if (!isempty(queue)) {
         rear->next = tmp;
         rear = tmp;
     }
@@ -62,7 +62,7 @@ void* dequeue(queue_t *queue)
     return n;
 }
 
-int main()
+int main(void)
 {
     queue_t *queue;
     queue = (queue_t *) malloc(sizeof(*queue)); 
@@ -80,7 +80,7 @@ int main()
     printf("##########################\n");
 
     process_t process[MAX_NUMBER_OF_PROCESS];
-    for(int i=0;i<MAX_NUMBER_OF_PROCESS;i++) {
+    for (int i=0;i<MAX_NUMBER_OF_PROCESS;i++) {
         process_t *p = &process[i];
         p->PID = i;
         p->name = malloc(sizeof(*p->name)*9);
@@ -101,7 +101,7 @@ int main()
     printf("#         Dequeue        #\n");
     printf("##########################\n"); 
 
-    for(int i=0;i<MAX_NUMBER_OF_PROCESS;i++) {
+    for (int i=0;i<MAX_NUMBER_OF_PROCESS;i++) {
         process_t* dequeuedProcess =  dequeue(queue);
         printf("Dequeued %s .....\t", dequeuedProcess->name);
         display(queue->data);
